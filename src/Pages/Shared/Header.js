@@ -1,18 +1,18 @@
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
 import React from "react";
-
+import laptop from '../../assets/Images/laptop.png';
 const Header = () => {
   return (
     <div>
       <Navbar fluid={true} rounded={true}>
         <Navbar.Brand href="https://flowbite.com/">
           <img
-            src="https://flowbite.com/docs/images/logo.svg"
+            src={laptop}
             className="mr-3 h-6 sm:h-9"
-            alt="Flowbite Logo"
+            alt="laptop Logo"
           />
           <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-            Flowbite
+            Computers Hub
           </span>
         </Navbar.Brand>
         <div className="flex md:order-2">
