@@ -6,6 +6,8 @@ module.exports = {
     'node_modules/daisyui/dist/**/*.js',
     'node_modules/react-daisyui/dist/**/*.js',
     'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}',
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
   ],
     theme: {
     extend: {},
@@ -16,3 +18,4 @@ module.exports = {
 ],
 
 }
+
