@@ -1,0 +1,82 @@
+[
+    {
+      "product_id":"01",
+      "name":"Microsoft",
+      "description":"Find the best Microsoft price! Microsoft for sale in this site.Buy and sell second hand Computers & Laptops in this site. Computers Hub provides the best second-hand Laptop.",
+      "img":"https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/Untitled1879.png",
+      "category_items": [
+        {
+         " image_url":"https://cf.shopee.com.my/file/21a6e5cc7586b7076c7b1c938f0e196e",
+          "name":"Microsoft Surface Pro",
+          "location":"uttara",
+          "resalePrice":400,
+          "originalPrice":1000,
+          "yearOfUse": "1year",
+          "date": "20/01/2023"
+        },
+        {
+          "image_url":"https://cf.shopee.com.my/file/088ffc5517c2445472e1885fbf6830cc",
+          "name":"Microsoft Surface Go",
+          "location":"Banani",
+          "resalePrice":"600",
+          "originalPrice":"1200",
+          "yearOfUse":"6months",
+          "date":"18/01/2023"
+        }
+      ]
+    },
+    {
+      "product_id":"02",
+      "name":"HP",
+      "description":"We offer used HP laptop price at affordable ranges. When it comes to laptop 2nd hand.A used HP laptop can allow people to be productive and have fun while on the go.",
+      "img":"https://ik.imagekit.io/budli/s/files/1/0961/0490/products/IMG_20221004_185007_large.jpg?v=1664945581",
+      "category_items": [
+        {
+          "image_url":"https://5.imimg.com/data5/HX/CE/LW/SELLER-39040582/refurbished-second-hand-hp-elitebook-840g1-core-i7-laptop-500x500.jpg",
+          "name":"HP-Elitebook",
+          "location":"Gulshan",
+          "resalePrice":300,
+          "originalPrice":700,
+          "yearOfUse":"2months",
+          "date":"02/01/2023"
+        },
+
+        {
+          "image_url":"https://laptopbd.net/wp-content/uploads/2021/06/hp-core-i7.jpg",
+          "name":"HP-Pavilion15",
+          "location":"Nikunja",
+          "resalePrice":400,
+          "originalPrice":900,
+          "yearOfUse":"8months",
+          "date":"03/01/2023"
+        }
+      ]
+    },
+    {
+      "product_id":"03",
+      "name":"DELL",
+      "description":"Find here Dell Second Hand Laptop, Dell Used Laptop dealers, retailers, stores & distributors. Get latest prices, models & wholesale prices for buying Dell.",
+      "img":"https://5.imimg.com/data5/QU/JT/MY-19799462/dell-second-hand-laptop-500x500.jpg",
+      "category_items": [
+        {
+          "image_url":"https://5.imimg.com/data5/ZE/XE/WD/SELLER-23222063/second-hand-laptop-1000x1000.jpg",
+          "name":"DELL-Inspiron 16 Plus",
+          "location":"Dhanmondi",
+          "resalePrice":500,
+          "originalPrice":950,
+          "yearOfUse":"7months",
+          "date":"05/01/2023"
+        },
+
+        {
+         " image_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNAQS-mckhJsYk-pGESQ__2T0xLQiVFVugQg&usqp=CAU",
+          "name":"DELL-Latitude",
+          "location":"Malibagh",
+          "resalePrice":"400",
+          "originalPrice":"10000",
+          "yearOfUse":"3months",
+          "date":"07/01/2023"
+        }
+      ]
+    }
+  ]

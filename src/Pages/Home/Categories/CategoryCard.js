@@ -1,8 +1,11 @@
 import { Button, Card } from "flowbite-react";
 import React from "react";
+import { Link } from 'react-router-dom';
+
 
 const CategoryCard = ({ category }) => {
-  const { name, description, img } = category;
+   const { _id, name, description, img } = category;
+   console.log(img);
   return (
     <div>
       <div className="max-w-sm">
@@ -13,7 +16,7 @@ const CategoryCard = ({ category }) => {
           <p className="font-normal text-gray-700 dark:text-gray-400">
             {description}
           </p>
-          <Button size="lg" className="text-2xl" gradientDuoTone="tealToLime">See Items</Button>
+          <Link to={`/products/${_id}`}><Button size="lg" className="text-2xl" gradientDuoTone="tealToLime">See Items</Button> </Link>
         </Card>
       </div>
     </div>
