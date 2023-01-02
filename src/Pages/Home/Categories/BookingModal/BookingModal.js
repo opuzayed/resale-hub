@@ -13,13 +13,17 @@ const BookingModal = ({singleProduct}) => {
           >
             ✕
           </label>
-          <h3 className="text-lg font-bold">
-            {name}
-          </h3>
-          <p className="py-4">
-            You've been selected for a chance to get one year of subscription to
-            use Wikipedia for free!
-          </p>
+          <form className="grid grid-cols-1 gap-3">
+              <input type="text" placeholder="Type here" className="input input-bordered w-full" />
+              <input type="text" placeholder="Type here" className="input input-bordered w-full" />
+              <input type="text" placeholder="Type here" className="input input-bordered w-full" />
+              <input type="text" placeholder="Type here" className="input input-bordered w-full" />
+              <input type="text" placeholder="Type here" className="input input-bordered w-full" />
+              <input type="text" placeholder="Type here" className="input input-bordered w-full" />
+              <br />
+              <input className="btn w-full text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" type="submit" value="Submit"/>
+          </form>
+         
         </div>
       </div>
     </>
