@@ -1,8 +1,17 @@
 import { Avatar, Dropdown, Navbar, Tooltip } from "flowbite-react";
+import { useContext } from "react";
 import laptop from "../../assets/Images/laptop.png";
 import ThemeSwitcher from "../../component/ThemeSwitcher/ThemeSwitcher";
+import { AuthContext } from "../../contexts/AuthProvider";
 
 const Header = () => {
+        const {user, logOut} = useContext(AuthContext);
+
+        const handleLogOut = () => {
+          logOut()
+          .then(()=> {})
+          .catch(error => console.error(error));
+        }
 
   return (
     <div>
@@ -52,11 +61,17 @@ const Header = () => {
           <Navbar.Link href="/navbars">Pricing</Navbar.Link>
           <Navbar.Link href="/navbars">Contact</Navbar.Link>
           <Navbar.Link href="/signup">
-          <button className="btn text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">SignUp</button>
+          <button className="btn text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Sign up</button>
           </Navbar.Link>
+          { user?.uid ?
+            <Navbar.Link href="/login">
+            <button onClick={handleLogOut} className="btn text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Sign out</button>
+          </Navbar.Link>
+          :
           <Navbar.Link href="/login">
-          <button className="btn text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Login</button>
+            <button className="btn text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Log in</button>
           </Navbar.Link>
+          }
          
         </Navbar.Collapse>
       </Navbar>
