@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 
 const SignUp = () => {
 
   const {register, handleSubmit, formState: { errors }} = useForm();
-  const {createUser} = useContext(AuthContext);
+  const {createUser, updateUser} = useContext(AuthContext);
 
   const handleSignUp = (data) => {
     console.log(data);
@@ -14,6 +15,13 @@ const SignUp = () => {
     .then(result => {
         const user = result.user;
         console.log(user);
+        toast.success('User created Successfully');
+        const userInfo = {
+            displayName : data.name
+        }
+        updateUser(userInfo)
+        .then(()=> {})
+        .catch(error => console.error(error));
     })
     .catch(error => console.error(error));
   };
@@ -23,36 +31,21 @@ const SignUp = () => {
       <div className="w-96 p-7">
         <h2 className="text-4xl text-center">Please Register Now</h2>
         <form onSubmit={handleSubmit(handleSignUp)} className='mt-5'>
+          
           <div className="form-control w-full max-w-xs">
             <label className="label">
               {" "}
-              <span className="label-text">First Name</span>{" "}
+              <span className="label-text">Name</span>{" "}
             </label>
             <input
               type="text"
-              {...register("fName", {
-                required: "First Name is required",
+              {...register("name", {
+                required: "Name is required",
               })}
               className="input input-bordered w-full max-w-xs"
             />
-            {errors.fName && (
-              <p className="text-error">{errors.fName?.message}</p>
-            )}
-          </div>
-          <div className="form-control w-full max-w-xs">
-            <label className="label">
-              {" "}
-              <span className="label-text">Last Name</span>{" "}
-            </label>
-            <input
-              type="text"
-              {...register("lName", {
-                required: "Last Name is required",
-              })}
-              className="input input-bordered w-full max-w-xs"
-            />
-            {errors.lName && (
-              <p className="text-error">{errors.lName?.message}</p>
+            {errors.name && (
+              <p className="text-error">{errors.name?.message}</p>
             )}
           </div>
           <div className="form-control w-full max-w-xs">
