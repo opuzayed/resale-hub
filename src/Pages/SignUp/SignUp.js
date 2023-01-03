@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 
 const SignUp = () => {
-    
+
   const {register, handleSubmit, formState: { errors }} = useForm();
   const {createUser} = useContext(AuthContext);
 
@@ -104,7 +104,7 @@ const SignUp = () => {
         </form>
         <p>
           Already have an account?
-          <Link className="text-sky-400" to="/signup">
+          <Link className="text-sky-400" to="/login">
             Please Login
           </Link>
         </p>

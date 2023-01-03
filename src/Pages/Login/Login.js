@@ -1,13 +1,27 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthProvider";
 
 const Login = () => {
   const { register, formState: { errors }, handleSubmit } = useForm();
-  
+  const {signIn} = useContext(AuthContext);
+  const [loginError, setLoginError] = useState('');
+
   const handleLogin = data => 
   {
     console.log(data);
+    setLoginError('');
+
+    signIn(data.email, data.password)
+    .then(result => {
+      const user = result.user;
+      console.log(user);
+    })
+    .catch(error => {
+      console.error(error.message);
+      setLoginError(error.message);
+    });
   }
 
   return (
@@ -25,6 +39,7 @@ const Login = () => {
             <input type="password" className="input input-bordered w-full max-w-xs" {...register("password", {required : 'Password is required', minLength:{value : 6, message:'Password should be six characters or long'}
           })}/>
             {errors.password && <p className="text-error">{errors.password?.message}</p>}
+            {loginError && <p className="text-error">{loginError}</p>}
             <label className="label"> <span className="label-text">Forget Password?</span> </label>
           </div>
           <input className="btn w-full text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" type="submit" value='Login'/>
