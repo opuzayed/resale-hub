@@ -22,9 +22,7 @@ const Login = () => {
           </div>
           <div className="form-control w-full max-w-xs">
             <label className="label"> <span className="label-text">Password</span> </label>
-            <input type="password" className="input input-bordered w-full max-w-xs" {...register("password", {required : 'Password is required'
-          ,
-          minLength:{value : 6, message:'Password should be six characters or long'}
+            <input type="password" className="input input-bordered w-full max-w-xs" {...register("password", {required : 'Password is required', minLength:{value : 6, message:'Password should be six characters or long'}
           })}/>
             {errors.password && <p className="text-error">{errors.password?.message}</p>}
             <label className="label"> <span className="label-text">Forget Password?</span> </label>
@@ -38,5 +36,4 @@ const Login = () => {
     </div>
   );
 };
-
 export default Login;
