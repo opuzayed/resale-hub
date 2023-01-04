@@ -1,14 +1,27 @@
+import { GoogleAuthProvider } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 
 const SignUp = () => {
 
     const {register, handleSubmit, formState: { errors }} = useForm();
-    const {createUser, updateUser} = useContext(AuthContext);
+    const {createUser, updateUser,  googleProviderLogin} = useContext(AuthContext);
     const [signUpError, setSignUpError] = useState('');
+
+    const googleProvider = new GoogleAuthProvider();
+
+    // const handleGoogleRegister = () => {
+    //   googleProviderLogin(googleProvider)
+    //     .then((result) => {
+    //       const user = result.user;
+    //       console.log(user);
+    //       Navigate(from, { to: "/" }, { replace: true });
+    //     })
+    //     .catch((error) => console.error(error));
+    // };
 
   const handleSignUp = (data) => {
     console.log(data);

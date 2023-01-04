@@ -1,14 +1,30 @@
+import { GoogleAuthProvider } from "firebase/auth";
+import { FcGoogle } from "react-icons/fc";
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 
+
 const Login = () => {
   const { register, formState: { errors }, handleSubmit } = useForm();
-  const {signIn} = useContext(AuthContext);
+  const {signIn, googleProviderLogin} = useContext(AuthContext);
   const [loginError, setLoginError] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
+
+  const googleProvider = new GoogleAuthProvider();
+
+  const handleGoogleSignIn = () => {
+    googleProviderLogin(googleProvider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        navigate(from, { to: "/" }, { replace: true });
+      })
+      .catch((error) => console.error(error));
+  };
+
 
   const from = location.state?.from?.pathname || "/";
 
@@ -51,7 +67,7 @@ const Login = () => {
         </form>
         <p>New to Computers Hub?<Link className="text-sky-400" to='/signup'> Create new account</Link></p>
         <div className="divider">OR</div>
-        <button className="btn btn-outline btn-accent w-full">CONTINUE WITH GOOGLE</button>
+        <button onClick={handleGoogleSignIn} className="btn btn-outline btn-accent w-full"> <FcGoogle></FcGoogle> &nbsp;&nbsp; CONTINUE WITH GOOGLE</button>
       </div>
     </div>
   );
