@@ -1,17 +1,27 @@
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { useEffect } from 'react';
-import { useState } from 'react';
+//import { useEffect } from 'react';
+//import { useState } from 'react';
 import CategoryCard from "./CategoryCard";
 
 const Categories = () => {
-  const [products, setProducts] = useState([]);
+  //const [products, setProducts] = useState([]);
+
+  const {data : products = []} = useQuery({
+        queryKey : ['products'],
+        queryFn : async () => {
+          const res = await fetch('http://localhost:5000/products');
+          const data = await res.json();
+          return data;
+        }
+  });
   
-  useEffect( () =>{
-      fetch('http://localhost:5000/products')
-      .then(res =>res.json())
-      .then(data => setProducts(data))
-  }, []);
-  // 
+  // useEffect( () =>{
+  //     fetch('http://localhost:5000/products')
+  //     .then(res =>res.json())
+  //     .then(data => setProducts(data))
+  // }, []);
+  
   return (
     <div>
       <section className="bg-white dark:bg-gray-900 mt-5">

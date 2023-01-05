@@ -3,7 +3,7 @@ import { Card } from "react-daisyui";
 
 const Blog = () => {
   return (
-    <div className="text-white rounded-lg ">
+    <div className="text-white rounded-lg">
       <div className="mb-3"></div>
       <Card side="lg" className="mt-5 border-sky-900">
         <Card.Body>
