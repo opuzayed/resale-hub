@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import { toast } from "react-hot-toast";
+
+import { AuthContext } from "../../../../contexts/AuthProvider";
 
 const BookingModal = ({singleProduct, setSingleProduct}) => {
     const {name, resalePrice} = singleProduct;
+    const {user} = useContext(AuthContext);
 
       const handleBooking = event => {
         event.preventDefault();
@@ -21,8 +25,22 @@ const BookingModal = ({singleProduct, setSingleProduct}) => {
            phone : phone,
            meetingLocation : meetingLocation
         }
-        console.log(booking);
-        setSingleProduct(null);
+       fetch('http://localhost:5000/bookings', {
+        method : 'POST',
+        headers :{
+          'content-type' : 'application/json',
+        },
+        body : JSON.stringify(booking),
+       })
+       .then(res => res.json())
+       .then(data => {
+        console.log(data);
+        if(data.acknowledged)
+        {
+          setSingleProduct(null);
+          toast.success('Successfully booked');
+        }
+      });
       }
 
   return (
@@ -32,8 +50,8 @@ const BookingModal = ({singleProduct, setSingleProduct}) => {
         <div className="modal-box relative">
           <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2"> ✕ </label>
           <form onSubmit={handleBooking} className="grid grid-cols-1 gap-3 mt-10">
-              <input name="name" type="text" placeholder="UserName" className="input input-bordered w-full" readOnly/>
-              <input name="email" type="email" placeholder="Email" className="input input-bordered w-full" readOnly/>
+              <input name="name" type="text" defaultValue= {user?.displayName} placeholder="UserName" className="input input-bordered w-full" readOnly/>
+              <input name="email" type="email" defaultValue={user?.email} placeholder="Email" className="input input-bordered w-full" readOnly/>
               <input name="itemName" type="text" placeholder="Item Name" className="input input-bordered w-full" value={name} readOnly/>
               <input name='price' type="text" placeholder="Item Price" className="input input-bordered w-full" value={resalePrice} readOnly/>
               <input name='phone' type="text" placeholder="Phone Number" className="input input-bordered w-full" required/>

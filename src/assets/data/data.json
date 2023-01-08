@@ -5,8 +5,8 @@
         "image_url": "https://cf.shopee.com.my/file/21a6e5cc7586b7076c7b1c938f0e196e",
         "name": "Microsoft Surface Pro",
         "location":"uttara",
-        "resalePrice":400,
-        "originalPrice":1000,
+        "resalePrice":"$400",
+        "originalPrice":"$1000",
         "yearOfUse":"1year",
         "date" :"20/01/2023"
     },

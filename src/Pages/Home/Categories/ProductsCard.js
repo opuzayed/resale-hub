@@ -11,7 +11,7 @@ const ProductsCard = ({ item, setSingleProduct }) => {
     yearOfUse,
     date,
   } = item;
-  //console.log(image_url);
+  
   return (
     <div>
       <div className="max-w-sm">
@@ -23,10 +23,10 @@ const ProductsCard = ({ item, setSingleProduct }) => {
             Location : {location}
           </p>
           <p className="font-normal text-gray-700 dark:text-gray-400">
-            ResalePrice : ${resalePrice}
+            ResalePrice : {resalePrice}
           </p>
           <p className="font-normal text-gray-700 dark:text-gray-400">
-            OriginalPrice : ${originalPrice}
+            OriginalPrice : {originalPrice}
           </p>
           <p className="font-normal text-gray-700 dark:text-gray-400">
             YearOfUse : {yearOfUse}

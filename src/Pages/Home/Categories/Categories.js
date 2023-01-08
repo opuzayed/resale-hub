@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import Loading from "../../Shared/Loading/Loading";
 //import { useEffect } from 'react';
 //import { useState } from 'react';
 import CategoryCard from "./CategoryCard";
@@ -7,7 +8,7 @@ import CategoryCard from "./CategoryCard";
 const Categories = () => {
   //const [products, setProducts] = useState([]);
 
-  const {data : products = []} = useQuery({
+  const {data : products = [], isLoading} = useQuery({
         queryKey : ['products'],
         queryFn : async () => {
           const res = await fetch('http://localhost:5000/products');
@@ -15,6 +16,10 @@ const Categories = () => {
           return data;
         }
   });
+  if(isLoading)
+  {
+    return <Loading></Loading>
+  }
   
   // useEffect( () =>{
   //     fetch('http://localhost:5000/products')

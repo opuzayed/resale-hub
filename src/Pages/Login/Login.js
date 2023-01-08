@@ -67,7 +67,7 @@ const Login = () => {
         </form>
         <p>New to Computers Hub?<Link className="text-sky-400" to='/signup'> Create new account</Link></p>
         <div className="divider">OR</div>
-        <button onClick={handleGoogleSignIn} className="btn btn-outline btn-accent w-full"> <FcGoogle></FcGoogle> &nbsp;&nbsp; CONTINUE WITH GOOGLE</button>
+        <button onClick={handleGoogleSignIn} className="btn btn-outline btn-accent w-full"> <FcGoogle></FcGoogle> &nbsp;&nbsp; LOGIN WITH GOOGLE</button>
       </div>
     </div>
   );
