@@ -1,56 +1,59 @@
-import { GoogleAuthProvider } from "firebase/auth";
-import React, { useContext, useState } from "react";
+import React, {  useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../contexts/AuthProvider";
+import { AuthContext } from './../../contexts/AuthProvider';
 
 const SignUp = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const { createUser, updateUser, googleProviderLogin } =
-    useContext(AuthContext);
-  const [signUpError, setSignUpError] = useState("");
-  const navigate = useNavigate();
+  const { register, handleSubmit, formState: { errors } } = useForm();
+    const { createUser, updateUser } = useContext(AuthContext);
+    const [signUpError, setSignUPError] = useState('');
+    //const [createdUserEmail, setCreatedUserEmail] = useState('')
+    //const [token] = useToken(createdUserEmail);
+    const navigate = useNavigate();
 
-  const googleProvider = new GoogleAuthProvider();
+    // if(token){
+    //     navigate('/');
+    // }
 
-  // const handleGoogleRegister = () => {
-  //   googleProviderLogin(googleProvider)
-  //     .then((result) => {
-  //       const user = result.user;
-  //       console.log(user);
-  //       Navigate(from, { to: "/" }, { replace: true });
-  //     })
-  //     .catch((error) => console.error(error));
-  // };
+    const handleSignUp = (data) => {
+        setSignUPError('');
+        createUser(data.email, data.password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                toast.success('User Created Successfully.')
+                const userInfo = {
+                    displayName: data.name
+                }
+                updateUser(userInfo)
+                    .then(() => {
+                        saveUser(data.name, data.email, data.category);
+                    })
+                    .catch(err => console.log(err));
+            })
+            .catch(error => {
+                console.log(error)
+                setSignUPError(error.message)
+            });
+    }
 
-  const handleSignUp = (data) => {
-    console.log(data);
-    setSignUpError("");
-    createUser(data.email, data.password)
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
-        toast.success("User created Successfully");
-        const userInfo = {
-          displayName: data.name,
-        };
-        updateUser(userInfo)
-          .then(() => {
-            navigate("/");
-          })
-          .catch((error) => console.error(error));
-      })
-      .catch((error) => {
-        console.error(error);
-        setSignUpError(error.message);
-      });
-  };
-
+    const saveUser = (name, email, category) =>{
+        const user ={name, email, category};
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+        .then(res => res.json())
+        .then(data =>{
+            //setCreatedUserEmail(email);
+            navigate('/');
+        })
+    }
+    
   return (
     <div className="h-[800px] flex justify-center items-center">
       <div className="w-96 p-7">
@@ -113,18 +116,21 @@ const SignUp = () => {
               <p className="text-error">{errors.password.message}</p>
             )}
           </div>
+          <div form-control w-full max-w-xs mt-5>
+          <label className="label">
+              {" "}
+              <span className="label-text">Select Category</span>
+            </label>
           <select
             {...register("category", {
               message: "Please select seller or buyer",
             })}
-            className="form-control w-full max-w-xs mt-5 input input-bordered"
+            className="input input-bordered w-full"
           >
+            <option value="buyer" selected>Buyer</option>
             <option value="seller">Seller</option>
-            <option value="buyer">Buyer</option>
           </select>
-          {errors.category && (
-            <p className="text-error">{errors.category?.message}</p>
-          )}
+          </div>
           <input
             className="btn  mt-5 w-full text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
             type="submit"
