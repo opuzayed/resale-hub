@@ -1,9 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import Loading from "../../Shared/Loading/Loading";
 
 const AddProduct = () => {
   const {
@@ -15,17 +13,6 @@ const AddProduct = () => {
   const imageHostKey = process.env.REACT_APP_imgbb_key;
 
   const navigate = useNavigate();
-
-  const { data: specialties, isLoading } = useQuery({
-    queryKey: ["specialty"],
-    queryFn: async () => {
-      const res = await fetch(
-        "https://doctors-portal-server-rust.vercel.app/appointmentSpecialty"
-      );
-      const data = await res.json();
-      return data;
-    },
-  });
 
   const handleAddDoctor = (data) => {
     const image = data.image[0];
@@ -40,40 +27,40 @@ const AddProduct = () => {
       .then((imgData) => {
         if (imgData.success) {
           console.log(imgData.data.url);
-          const doctor = {
+          const product = {
             name: data.name,
-            email: data.email,
-            specialty: data.specialty,
+            price:data.price,
             image: imgData.data.url,
+            location:data.location,
+            condition:data.condition,
+            purchase:data.purchase,
+            productCategory:data.product,
+            mobileNumber:data.mobile,
+            description:data.description
           };
-
-          // save doctor information to the database
-          fetch("https://doctors-portal-server-rust.vercel.app/doctors", {
+          console.log(product);
+          fetch("http://localhost:5000/sellerproducts", {
             method: "POST",
             headers: {
               "content-type": "application/json",
-              authorization: `bearer ${localStorage.getItem("accessToken")}`,
+             
             },
-            body: JSON.stringify(doctor),
+            body: JSON.stringify(product),
           })
             .then((res) => res.json())
             .then((result) => {
               console.log(result);
               toast.success(`${data.name} is added successfully`);
-              navigate("/dashboard/managedoctors");
+              navigate("/dashboard/myproduct");
             });
         }
       });
   };
 
-  if (isLoading) {
-    return <Loading></Loading>;
-  }
-
   return (
-    <div className="w-96 p-7">
-      <h2 className="text-4xl">Add A Product</h2>
-      <form onSubmit={handleSubmit(handleAddDoctor)}>
+    <div className="w-full p-7">
+      <h2 className="text-4xl mb-5">Add A Product</h2>
+      <form className="grid gap-6 justify-between grid-cols-1 md:grid-cols-2" onSubmit={handleSubmit(handleAddDoctor)}>
         <div className="form-control w-full max-w-xs">
           <label className="label">
             {" "}
@@ -82,7 +69,7 @@ const AddProduct = () => {
           <input
             type="text"
             {...register("name", {
-              required: "Name is Required",
+              required: "Product Name is Required",
             })}
             className="input input-bordered w-full max-w-xs"
           />
@@ -182,7 +169,7 @@ const AddProduct = () => {
             })}
             className="input input-bordered w-full max-w-xs"
           />
-          {errors.img && <p className="text-red-500">{errors.img.message}</p>}
+          {errors.img && <p className="text-error">{errors.img.message}</p>}
         </div>
         <div className="form-control w-full max-w-xs">
           <label className="label">
@@ -203,11 +190,15 @@ const AddProduct = () => {
             {" "}
             <span className="label-text">Message</span>
           </label>
-        <textarea className="textarea textarea-bordered" placeholder="Product Description"></textarea>
+        <textarea 
+        {...register("description", {
+          required: "Description is Required",
+        })}
+        className="textarea textarea-bordered" placeholder="Product Description"></textarea>
         </div>
         <input
-          className="btn btn-accent w-full mt-4"
-          value="Add Doctor"
+         className="btn form-control w-full max-w-xs text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+          value="Add Product"
           type="submit"
         />
       </form>
