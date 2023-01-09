@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../contexts/AuthProvider";
 
 const AddProduct = () => {
-  const {
+  const {user} = useContext(AuthContext);
+    const {
     register,
     handleSubmit,
     formState: { errors },
@@ -14,7 +16,7 @@ const AddProduct = () => {
 
   const navigate = useNavigate();
 
-  const handleAddDoctor = (data) => {
+  const handleAddProduct = (data) => {
     const image = data.image[0];
     const formData = new FormData();
     formData.append("image", image);
@@ -26,9 +28,10 @@ const AddProduct = () => {
       .then((res) => res.json())
       .then((imgData) => {
         if (imgData.success) {
-          console.log(imgData.data.url);
+          
           const product = {
             name: data.name,
+            email:user.email,
             price:data.price,
             image: imgData.data.url,
             location:data.location,
@@ -60,7 +63,7 @@ const AddProduct = () => {
   return (
     <div className="w-full p-7">
       <h2 className="text-4xl mb-5">Add A Product</h2>
-      <form className="grid gap-6 justify-between grid-cols-1 md:grid-cols-2" onSubmit={handleSubmit(handleAddDoctor)}>
+      <form className="grid gap-6 justify-between grid-cols-1 md:grid-cols-2" onSubmit={handleSubmit(handleAddProduct)}>
         <div className="form-control w-full max-w-xs">
           <label className="label">
             {" "}
