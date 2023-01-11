@@ -5,18 +5,18 @@ import ConfirmationModal from '../../Shared/ConfirmationModal/ConfirmationModal'
 import Loading from '../../Shared/Loading/Loading';
 
 
-const  AllByers= () => {
-    const [deletingBuyers, setDeletingBuyers] = useState(null);
+const  AllSellers= () => {
+    const [deletingSellers, setDeletingSellers] = useState(null);
 
     const closeModal = () => {
-        setDeletingBuyers(null);
+        setDeletingSellers(null);
     }
-    const { data: buyers, isLoading, refetch } = useQuery({
+    const { data: sellers, isLoading, refetch } = useQuery({
        
-        queryKey: ['allbuyers'],
+        queryKey: ['allsellers'],
         queryFn: async () => {
             try {
-                const res = await fetch('http://localhost:5000/allbuyers', {
+                const res = await fetch('http://localhost:5000/allsellers', {
                     // headers: {
                     //     authorization: `bearer ${localStorage.getItem('accessToken')}`
                     // }
@@ -32,8 +32,8 @@ const  AllByers= () => {
     
 
     
-    const handleDeleteBuyer = buyer => {
-        fetch(`http://localhost:5000/allbuyers/${buyer._id}`, {
+    const handleDeleteSeller = seller => {
+        fetch(`http://localhost:5000/allsellers/${seller._id}`, {
             method: 'DELETE', 
             // headers: {
             //     authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -43,7 +43,7 @@ const  AllByers= () => {
         .then(data => {
             if(data.deletedCount > 0){
                 refetch();
-                toast.success(`Buyer ${buyer.name} deleted successfully`)
+                toast.success(`Seller ${seller.name} deleted successfully`)
             }
         })
     }
@@ -54,25 +54,25 @@ const  AllByers= () => {
 
     return (
         <div>
-            <h2 className="text-3xl mt-5">You have {buyers?.length} buyers</h2>
+            <h2 className="text-3xl mt-5">You have {sellers?.length} sellers`</h2>
             <div className="overflow-x-auto">
                 <table className="table w-full mt-5">
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Buyer Name</th>
+                            <th>Seller Name</th>
                             <th>Email</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            buyers.map((buyer, i) => <tr key={buyer._id}>
+                            sellers.map((buyer, i) => <tr key={buyer._id}>
                                 <th>{i + 1}</th>
                                 <td>{buyer.name}</td>
                                 <td>{buyer.email}</td>
                                 <td>
-                                    <label onClick={() => setDeletingBuyers(buyer)} htmlFor="confirmation-modal" className="btn btn-sm btn-error">Delete</label>
+                                    <label onClick={() => setDeletingSellers(buyer)} htmlFor="confirmation-modal" className="btn btn-sm btn-error">Delete</label>
                                 </td>
                             </tr>)
                         }
@@ -80,12 +80,12 @@ const  AllByers= () => {
                 </table>
             </div>
             {
-                deletingBuyers && <ConfirmationModal
+                deletingSellers && <ConfirmationModal
                     title={`Are you sure you want to delete?`}
-                    message={`If you delete ${deletingBuyers.name}. It cannot be undone.`}
-                    successAction = {handleDeleteBuyer}
+                    message={`If you delete ${deletingSellers.name}. It cannot be undone.`}
+                    successAction = {handleDeleteSeller}
                     successButtonName="Delete"
-                    modalData = {deletingBuyers}
+                    modalData = {deletingSellers}
                     closeModal = {closeModal}
                 >
                 </ConfirmationModal>
@@ -94,4 +94,4 @@ const  AllByers= () => {
     );
 };
 
-export default AllByers;
+export default AllSellers;
