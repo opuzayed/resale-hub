@@ -1,15 +1,15 @@
-import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
-import { toast } from "react-hot-toast";
-import ConfirmationModal from "../../Shared/ConfirmationModal/ConfirmationModal";
-import Loading from "../../Shared/Loading/Loading";
+import { useQuery } from '@tanstack/react-query';
+import React, { useState } from 'react';
+import toast from 'react-hot-toast';
+import ConfirmationModal from '../../Shared/ConfirmationModal/ConfirmationModal';
+import Loading from '../../Shared/Loading/Loading';
 
 
 const  AllByers= () => {
-    const [deletingBuyer, setDeletingBuyer] = useState(null);
+    const [deletingBuyers, setDeletingBuyers] = useState(null);
 
     const closeModal = () => {
-        setDeletingBuyer(null);
+        setDeletingBuyers(null);
     }
     const { data: buyers, isLoading, refetch } = useQuery({
        
@@ -32,7 +32,7 @@ const  AllByers= () => {
     
 
     
-    const handleDeleteDoctor = buyer => {
+    const handleDeleteBuyer = buyer => {
         fetch(`http://localhost:5000/allbuyers/${buyer._id}`, {
             method: 'DELETE', 
             // headers: {
@@ -43,7 +43,7 @@ const  AllByers= () => {
         .then(data => {
             if(data.deletedCount > 0){
                 refetch();
-                toast.success(`Product ${buyer.name} deleted successfully`)
+                toast.success(`Buyer ${buyer.name} deleted successfully`)
             }
         })
     }
@@ -72,7 +72,7 @@ const  AllByers= () => {
                                 <td>{buyer.name}</td>
                                 <td>{buyer.email}</td>
                                 <td>
-                                    <label onClick={() => setDeletingBuyer(buyer)} htmlFor="confirmation-modal" className="btn btn-sm btn-error">Delete</label>
+                                    <label onClick={() => setDeletingBuyers(buyer)} htmlFor="confirmation-modal" className="btn btn-sm btn-error">Delete</label>
                                 </td>
                             </tr>)
                         }
@@ -80,12 +80,12 @@ const  AllByers= () => {
                 </table>
             </div>
             {
-                deletingBuyer && <ConfirmationModal
+                deletingBuyers && <ConfirmationModal
                     title={`Are you sure you want to delete?`}
-                    message={`If you delete ${deletingBuyer.name}. It cannot be undone.`}
-                    successAction = {handleDeleteDoctor}
+                    message={`If you delete ${deletingBuyers.name}. It cannot be undone.`}
+                    successAction = {handleDeleteBuyer}
                     successButtonName="Delete"
-                    modalData = {deletingBuyer}
+                    modalData = {deletingBuyers}
                     closeModal = {closeModal}
                 >
                 </ConfirmationModal>
