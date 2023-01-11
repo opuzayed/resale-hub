@@ -16,9 +16,9 @@ const  MyProducts= () => {
         queryFn: async () => {
             try {
                 const res = await fetch('http://localhost:5000/sellerproducts', {
-                    // headers: {
-                    //     authorization: `bearer ${localStorage.getItem('accessToken')}`
-                    // }
+                     headers: {
+                         authorization: `bearer ${localStorage.getItem('accessToken')}`
+                     }
                 });
                 const data = await res.json();
                 return data;
@@ -34,9 +34,9 @@ const  MyProducts= () => {
     const handleDeleteDoctor = product => {
         fetch(`http://localhost:5000/sellerproducts/${product._id}`, {
             method: 'DELETE', 
-            // headers: {
-            //     authorization: `bearer ${localStorage.getItem('accessToken')}`
-            // }
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
         })
         .then(res => res.json())
         .then(data => {
