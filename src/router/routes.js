@@ -6,6 +6,7 @@ import AddProduct from "../Pages/Dashboard/AddProduct/AddProduct";
 import AllByers from "../Pages/Dashboard/AllBuyers/AllByers";
 import MyOrders from "../Pages/Dashboard/MyOrders/MyOrders";
 import MyProducts from "../Pages/Dashboard/MyProducts/MyProducts";
+import Error from "../Pages/Error/Error";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
@@ -66,5 +67,9 @@ export const router = createBrowserRouter([
       element: <AdminRoute> <AllByers></AllByers> </AdminRoute>
   },
     ]
+  },
+  {
+    path:'*',
+    element:<Error></Error>
   }
 ]);
