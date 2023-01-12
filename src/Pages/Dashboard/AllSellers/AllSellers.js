@@ -17,9 +17,7 @@ const  AllSellers= () => {
         queryFn: async () => {
             try {
                 const res = await fetch('http://localhost:5000/allsellers', {
-                    headers: {
-                         authorization: `bearer ${localStorage.getItem('accessToken')}`
-                }
+                
                 });
                 const data = await res.json();
                 return data;
@@ -29,15 +27,9 @@ const  AllSellers= () => {
             }
         }
     });
-    
-
-    
     const handleDeleteSeller = seller => {
         fetch(`http://localhost:5000/allsellers/${seller._id}`, {
-            method: 'DELETE', 
-             headers: {
-                authorization: `bearer ${localStorage.getItem('accessToken')}`
-            }
+            method: 'DELETE'
         })
         .then(res => res.json())
         .then(data => {
@@ -54,7 +46,7 @@ const  AllSellers= () => {
 
     return (
         <div>
-            <h2 className="text-3xl mt-5">You have {sellers?.length} sellers`</h2>
+            <h2 className="text-3xl mt-5">You have {sellers?.length} sellers</h2>
             <div className="overflow-x-auto">
                 <table className="table w-full mt-5">
                     <thead>

@@ -1,12 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import Loading from "../../Shared/Loading/Loading";
-//import { useEffect } from 'react';
-//import { useState } from 'react';
+
 import CategoryCard from "./CategoryCard";
 
 const Categories = () => {
-  //const [products, setProducts] = useState([]);
 
   const {data : products = [], isLoading} = useQuery({
         queryKey : ['products'],
@@ -20,13 +18,6 @@ const Categories = () => {
   {
     return <Loading></Loading>
   }
-  
-  // useEffect( () =>{
-  //     fetch('http://localhost:5000/products')
-  //     .then(res =>res.json())
-  //     .then(data => setProducts(data))
-  // }, []);
-  
   return (
     <div>
       <section className="bg-white dark:bg-gray-900 mt-5">

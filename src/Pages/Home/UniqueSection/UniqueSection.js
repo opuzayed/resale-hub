@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import img from "../../../assets/Images/unique.jpg";
 const UniqueSection = () => {
   return (

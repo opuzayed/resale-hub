@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 const MyOrders = () => {
@@ -12,9 +11,6 @@ const MyOrders = () => {
         queryKey: ['bookings', user?.email],
         queryFn: async () => {
             const res = await fetch(url, {
-                 headers: {
-                     authorization: `bearer ${localStorage.getItem('accessToken')}`
-                 }
             });
             const data = await res.json();
             return data;
@@ -31,7 +27,7 @@ const MyOrders = () => {
                             <th></th>
                             <th>Product Name</th>
                             <th>Price</th>
-                            <th>Action</th>
+                            <th>Payment</th>
                         </tr>
                     </thead>
                     <tbody>

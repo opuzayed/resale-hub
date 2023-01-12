@@ -1,4 +1,3 @@
-import { Card } from "flowbite-react";
 import React from "react";
 
 const ProductsCard = ({ item, setSingleProduct }) => {
@@ -11,33 +10,30 @@ const ProductsCard = ({ item, setSingleProduct }) => {
     yearOfUse,
     date,
   } = item;
-  
+
   return (
     <div>
-      <div className="max-w-sm">
-        <Card imgAlt="laptop pic" imgSrc={image_url}>
-          <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            ProductName : {name}
-          </h5>
-          <p className="font-normal text-gray-700 dark:text-gray-400">
-            Location : {location}
-          </p>
-          <p className="font-normal text-gray-700 dark:text-gray-400">
-            ResalePrice : {resalePrice}
-          </p>
-          <p className="font-normal text-gray-700 dark:text-gray-400">
-            OriginalPrice : {originalPrice}
-          </p>
-          <p className="font-normal text-gray-700 dark:text-gray-400">
-            YearOfUse : {yearOfUse}
-          </p>
-          <p className="font-normal text-gray-700 dark:text-gray-400">
-            Date : {date}
-          </p>
-          <div>
-            <label htmlFor="booking-modal" onClick={()=>setSingleProduct(item)} className="btn text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Book Now</label>
+      <div className="card mx-auto w-96 bg-base-100 shadow-xl h-full">
+        <figure>
+          <img className="h-64 w-full" src={image_url} alt="Item Pic" />
+        </figure>
+        <div className="card-body">
+          <h2 className="card-title">ProductName : {name}</h2>
+          <p> Location : {location}</p>
+          <p>ResalePrice : {resalePrice}</p>
+          <p>OriginalPrice : {originalPrice}</p>
+          <p>YearOfUse : {yearOfUse}</p>
+          <p> Date : {date}</p>
+          <div className="card-actions">
+            <label
+              htmlFor="booking-modal"
+              onClick={() => setSingleProduct(item)}
+              className="btn text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+            >
+              Book Now
+            </label>
           </div>
-        </Card>
+        </div>
       </div>
     </div>
   );

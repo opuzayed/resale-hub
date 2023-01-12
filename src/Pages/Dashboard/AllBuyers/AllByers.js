@@ -17,9 +17,7 @@ const  AllByers= () => {
         queryFn: async () => {
             try {
                 const res = await fetch('http://localhost:5000/allbuyers', {
-                     headers: {
-                         authorization: `bearer ${localStorage.getItem('accessToken')}`
-                     }
+                   
                 });
                 const data = await res.json();
                 return data;
@@ -34,10 +32,7 @@ const  AllByers= () => {
     
     const handleDeleteBuyer = buyer => {
         fetch(`http://localhost:5000/allbuyers/${buyer._id}`, {
-            method: 'DELETE', 
-            headers: {
-                authorization: `bearer ${localStorage.getItem('accessToken')}`
-             }
+            method: 'DELETE'
         })
         .then(res => res.json())
         .then(data => {

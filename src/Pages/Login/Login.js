@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 
-
 const Login = () => {
   const { register, formState: { errors }, handleSubmit } = useForm();
   const {signIn, googleProviderLogin} = useContext(AuthContext);
@@ -25,8 +24,11 @@ const Login = () => {
       .catch((error) => console.error(error));
   };
 
-
   const from = location.state?.from?.pathname || "/";
+  
+  // if (token) {
+  //   navigate(from, { replace: true });
+  // }
 
   const handleLogin = data => 
   {
@@ -37,6 +39,7 @@ const Login = () => {
     .then(result => {
       const user = result.user;
       console.log(user);
+      //setLoginUserEmail(data.email);
       navigate(from, { replace: true });
     })
     .catch(error => {
@@ -47,7 +50,7 @@ const Login = () => {
 
   return (
     <div className="h-[800px] flex justify-center items-center">
-      <div className="w-96 p-7">
+      <div className="w-96 p-7 shadow-lg rounded-lg">
         <h2 className="text-4xl text-center">Please Login</h2>
         <form onSubmit={handleSubmit(handleLogin)}>
           <div className="form-control w-full max-w-xs">
