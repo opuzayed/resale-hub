@@ -3,7 +3,7 @@
 ### live link : https://computers-hub-31cc1.web.app/
 
 check admin role :    
-admin Email : zayed@opu.com
+admin Email : zayed@opu.com   
 admin password : 1234ZAYEDopu
                     
                     
